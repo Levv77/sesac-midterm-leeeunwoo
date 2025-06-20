@@ -28,7 +28,7 @@ model Users {
 model Todos {
   todoId      Int    @id @default(autoincrement()) @map("todo_id")
   title       String                               @map("title")
-  description String     @db.Text                  @map("description")
+  description String?    @db.Text                  @map("description")
   isCompleted Boolean    @default(false)           @map("is_complete")
   createdAt   DateTime   @default(now())           @map("created_at")
   updatedAt   DateTime   @updatedAt                @map("updated_at")

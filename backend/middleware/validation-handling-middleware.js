@@ -36,3 +36,9 @@ exports.loginValidation = [
     .isLength({ min: 6 }).withMessage('비밀번호가 6글자 이하입니다.')
     .notEmpty().withMessage('비밀번호를 입력해주세요.')
 ]
+
+// 할 일 생성 유효성 검사
+exports.todoValidation = [
+  body('title')
+    .notEmpty().withMessage('제목을 입력해주세요.')
+]
