@@ -34,11 +34,14 @@ router.get('/todos', async (req, res, next) => {
   try {
     const userId = req.userId;
 
-    console.log(userId);
+    const todoList = await prisma.todos.findUnique({
+      where: { userId }
+    })
 
-    // const todoList = await prisma.todos.findUnique({
-    //   where: { userId }
-    // })
+    return res.status(200).json({
+      message: '조회 성공',
+      data: todoList
+    })
 
   } catch (error) {
     console.log(error);
