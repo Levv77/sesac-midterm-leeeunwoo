@@ -32,3 +32,24 @@ body {
 .card:hover .card-text.description {
   display: block;
 }
+
+/* Login */
+.login-box {
+  width: 100%;
+  max-width: 500px;
+  padding: 40px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+h2 {
+  font-size: 1.8rem;
+}
+#login-msg {
+  margin-top: 15px;
+  font-weight: bold;
+  font-size: 1rem;
+}
+.form-label {
+  font-weight: 500;
+}
