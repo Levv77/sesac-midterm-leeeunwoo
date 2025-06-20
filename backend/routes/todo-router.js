@@ -32,7 +32,7 @@ router.post('/todos', authenticateToken, todoValidation, handleValidationResult,
 // 조회
 router.get('/todos', async (req, res, next) => {
   try {
-    const userId = req.userId;
+    const userId = req.user;
 
     const todoList = await prisma.todos.findUnique({
       where: { userId }
