@@ -26,3 +26,13 @@ exports.signUpValidation = [
   body('username')
     .notEmpty().withMessage('유저 이름을 입력해주세요.')
 ]
+
+// 로그인 유효성 검사
+exports.loginValidation = [
+  body('email')
+    .isEmail().withMessage('이메일 형식이 아닙니다.')
+    .notEmpty().withMessage('이메일을 입력해주세요.'),
+  body('password')
+    .isLength({ min: 6 }).withMessage('비밀번호가 6글자 이하입니다.')
+    .notEmpty().withMessage('비밀번호를 입력해주세요.')
+]

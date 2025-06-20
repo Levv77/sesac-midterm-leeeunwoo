@@ -8,6 +8,8 @@ const app = express();
 app.use(express.json());
 app.use('/', userRouter);
 
+app.use(errorHandlingMiddleware);
+
 app.listen(PORT, () => {
   console.log(`${PORT}번 포트가 열렸습니다!`);
 })

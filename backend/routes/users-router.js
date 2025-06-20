@@ -2,7 +2,7 @@ const express = require('express');
 const prisma  = require('../utils/prisma');
 const bcrypt = require('bcrypt');
 const jwt = require('../utils/jwt');
-const { signUpValidation, handleValidationResult } = require('../middleware/validation-handling-middleware')
+const { loginValidation, signUpValidation, handleValidationResult } = require('../middleware/validation-handling-middleware')
 
 const router = express.Router();
 
@@ -41,5 +41,32 @@ router.post('/auth/signup', signUpValidation, handleValidationResult, async (req
   }
 });
 
+// 로그인
+router.post('/auth/login', loginValidation, handleValidationResult, async (req, res, next) => {
+  try {
+    const { email, password } = req.body;
+    const user = await prisma.users.findUnique({
+      where: { email }
+    });
+
+    if (!user) {
+      return next(new Error('UserNotFound'));
+    }
+
+    const verifyPassword = await bcrypt.compare(password, user.password);
+
+    if (!verifyPassword) {
+      return next(new Error('PasswordError'));
+    }
+
+    const token = jwt.generateTokens(user.userId);
+
+    return res.status(200).json({ token });
+
+  } catch (error) {
+    console.log(error);
+    return next(error);
+  }
+});
 
 module.exports = router;
